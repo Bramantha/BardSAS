@@ -1,0 +1,37 @@
+<% include ../partials/headerNavSAS %>
+
+<a class="btn btn-outline-secondary" href="/sas/new/<%= univId %>">Add University Admin</a>
+<h4>Data University Admin</h4>
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">No.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(adminList.length > 0) { let i = 1; %>
+        <% adminList.forEach(function(admin) { %>
+          <tr class="table-light">
+            <th class="text-center" scope="row"><%= i %></th>
+            <td><%= admin.name %></td>
+            <td><%= admin.email %></td>
+            <td>
+                <form class="form-inline" action="/sas/university/admin/<%= admin._id %>?_method=DELETE" method="POST">
+                  <a href="/sas/university/admin/edit/<%= admin._id %>" class="btn btn-warning mr-3" type="submit">Edit</a>
+                  <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+            </td>
+          </tr>
+        <% i++; }) %>
+      <% } else { %>
+        <tr class="table-light">
+            <td class="text-center" colspan="4">No Data Found</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <% include ../partials/footer %>

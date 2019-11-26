@@ -1,0 +1,86 @@
+body{
+    font-family: Georgia;
+    margin: 0;
+    padding: 0;
+    background: rgb(185, 217, 238);
+  }
+
+  .spacer {
+      flex: 1 1 auto;
+  }
+
+  .bg-body {
+      background-color: orange;
+  }
+
+  main {
+    min-height: 80vh;
+  }
+
+  main > .container {
+    padding: 60px 15px 0;
+  }
+
+  .form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+  }
+  .form-signin .checkbox {
+    font-weight: 400;
+  }
+  .form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  .form-signin input[type="text"] {
+    margin-bottom: 25px;
+    border-radius: 23px;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 25px;
+    border-radius: 23px;
+  }
+
+  .form-signin input[type="email"] {
+    margin-bottom: 25px;
+    border-radius: 23px;
+  }
+
+  .btn-radius {
+      border-radius: 23px;
+  }
+
+  .card-radius {
+      border-radius: 23px;
+  }
+
+  .card-header-radius {
+      border-top-left-radius: 23px !important;
+      border-top-right-radius: 23px !important;
+  }
+  
+  .footer {
+    background-color: black;
+  }
+  
+  .footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+.picture{
+    width: 180px;
+    background: transparent;
+}
+
+.btn{
+  margin-bottom: 10%;
+}
