@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost/StudentDB', { useMongoClient: true })
     .catch(() => {
         console.log('Connected Failed')
     });
-
+    
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // Make folder public accessed from outside
 app.set("view engine", "ejs");

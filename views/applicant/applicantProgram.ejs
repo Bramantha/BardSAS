@@ -1,0 +1,23 @@
+<% include ../partials/headerNavApplicant %>
+
+    <div class="row mt-4">
+        <div class="col-12 col-md-8 offset-md-2">
+            <h4>
+                <%= programme.length > 1 ? 'List of Programs' : 'Program' %>
+            </h4>
+            <% programme.forEach(function(program) { %>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted">Closing Date: <%= moment(program.closingDate).format("D MMMM YYYY") %></small></p>
+                        <p class="card-text">
+                            <a href="/applicant/select/<%= program._id %>" class="card-link">
+                                <%= program.programmeName %>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <% include ../partials/footer %>

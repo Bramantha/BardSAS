@@ -1,4 +1,4 @@
-<% include ../partials/headerNavApplicant %>
+<% include ../partials/header %>
 
     <div class="row mt-4">
         <div class="col-12 col-md-6">
@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted">Closing Date: <%= moment(programme.closingDate).format("D MMMM YYYY") %></small></p>
                         <p class="card-text">
-                            <a href="/applicant/select/<%= program._id %>" class="card-link">
+                            <a href="/signin" class="card-link">
                                 <%= program.programmeName %>
                             </a>
                         </p>
@@ -26,7 +26,7 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <p class="card-text">
-                            <a href="/applicant/university/detail/<%= univ._id %>">
+                            <a href="/signin">
                                 <%= univ.universityName %>
                             </a>
                         </p>

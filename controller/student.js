@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const Applicant = require('../models/applicant');
 
 exports.viewRegister = (req, res, next) => {
     res.render("student/registerPage", {
@@ -21,14 +22,23 @@ exports.doRegister = (req, res, next) => {
                 level: 0
             });
 
-            user.save()
-                .then(result => {
-                    req.flash('success', 'Congratulation, you successfuly register to SAS');
-                    res.redirect('/signin');
-                })
-                .catch(err => {
+            User.create(user, function(err, user) {
+                if(err) {
+                    console.log('Error Tambah Admin 1', err)
                     req.flash('error', 'Something went wrong, ' + err);
                     res.redirect('/student/signup');
-                })
+                } else {
+                    const applicant = new Applicant({
+                        IDType: req.body.idType,
+                        IDNumber: req.body.idNumber,
+                        mobileNo: req.body.mobileNo,
+                        dateOfBirth: req.body.birthdate,
+                        userID: user._id
+                    });
+                    applicant.save()
+                    req.flash('success', 'Congratulation, you successfuly register to SAS');
+                    res.redirect('/signin');
+                }
+            });
         });
 }

@@ -1,31 +1,31 @@
 <% include ../partials/headerNavUniv %>
 
-<a class="btn btn-outline-secondary" href="/university/record">Back to Menu</a>
-<h4>Input Qualification Data</h4>
-<form action="/sas/edit/<%= programme._id %>?_method=PUT" method="POST">
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Programme Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="programmeName" value="<%= programme.ProgrammeName %>">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" name="description" value="<%= programme.description %>">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Closing Date</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" name="closing Date" value="<%= programme.closingDate %>">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Submit Data</button>
-    </div>
-  </div>
-</form>
+    <a class="btn btn-outline-secondary" href="/university/<%= idAdmin %>/record">Back to Menu</a>
+    <h4>Input Qualification Data</h4>
+    <form action="/university/<%= idAdmin %>/edit/<%= programme._id %>?_method=PUT" method="POST">
+        <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-2 col-form-label">Programme Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputEmail3" name="programmeName" value="<%= programme.programmeName %>">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" id="inputPassword3" name="description" rows="3"><%= programme.description %></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-2 col-form-label">Closing Date</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="closingDate" name="closingDate" value="<%= moment(programme.closingDate).format('YYYY-MM-DD') %>" onkeydown="event.preventDefault()">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Submit Data</button>
+            </div>
+        </div>
+    </form>
 
-<% include ../partials/footer %>
+    <% include ../partials/footer %>

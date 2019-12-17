@@ -1,45 +1,27 @@
 <% include ../partials/headerNavApplicant %>
 
-<nav class="navbar navbar-light bg-light">
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </nav>
-  <div class="row">
-  <div class="card" style="width: 18rem; margin-top: 100px; margin-right: 50px;">
-    <img src="/picture/book.png" class="card-img-top" alt="..." >
-    <div class="card-body">
-      <h5 class="card-title">Programme ID</h5>
-      <p class="card-text">University Name: <br>
-                            Programm Name: <br>
-                            Description: <br>
-                            Closing Date: </p>
-      <a href="#" class="btn btn-primary">Apply</a>
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= program.programmeName %>
+                    </h5>
+                    <% if(application === null) { %>
+                        <p class="card-text">Description:
+                            <%= program.description %><br> Closing Date:
+                                <%= moment(program.closingDate).format("D MMMM YYYY") %>
+                        </p>
+                        <a href="/applicant/qualification/<%= program._id %>" type="submit" class="btn btn-primary">Apply</a>
+                        <% } else if(application.programID.equals(program._id) && application.applicantID.equals(userId)) { %>
+                            <p class="card-text">Apply Date:
+                                <%= moment(application.applicationDate).format("D MMMM YYYY") %>
+                            </p>
+                            <span class="badge badge-pill badge-<%= application.status === 'NEW' ? 'info' : application.status === 'SUCCESSFUL' ? 'success' : 'danger' %>"><%= application.status %></span>
+                            <% } %>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="card" style="width: 18rem; margin-top: 100px; margin-right: 50px;">
-    <img src="/picture/book.png" class="card-img-top" alt="..." >
-    <div class="card-body">
-      <h5 class="card-title">Programme ID</h5>
-      <p class="card-text">University Name: <br>
-        Programm Name: <br>
-        Description: <br>
-        Closing Date: </p>
-      <a href="#" class="btn btn-primary">Apply</a>
-    </div>
-  </div>
-  <div class="card" style="width: 18rem; margin-top: 100px; margin-right: 50px;">
-    <img src="/picture/book.png" class="card-img-top" alt="..." >
-    <div class="card-body">
-      <h5 class="card-title">Programme ID</h5>
-      <p class="card-text">University Name: <br>
-        Programm Name: <br>
-        Description: <br>
-        Closing Date: </p>
-      <a href="#" class="btn btn-primary">Apply</a>
-    </div>
-  </div>
-</div>
 
-  <% include ../partials/footer %>
+    <% include ../partials/footer %>

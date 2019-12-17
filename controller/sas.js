@@ -66,6 +66,34 @@ exports.editQualification = (req, res, next) => {
     })
 }
 
+exports.editUniversity = (req, res, next) => {
+    const id = req.params.id;
+    University.findById(id).then(post => {
+        if(post) {
+            res.render("sas/sasEditUniversity", {
+                title: "SAS Register University | Student Application System",
+                university: post,
+                page: 'university',
+                univId: id
+            });
+        } else {
+            res.render("sas/sasEditUniversity", {
+                title: "SAS Register University | Student Application System",
+                university: null,
+                page: 'university',
+                univId: id
+            });
+        }
+    }).catch(err => {
+        res.render("sas/sasEditUniversity", {
+            title: "SAS Register University | Student Application System",
+            university: null,
+            page: 'university',
+            univId: id
+        });
+    })
+}
+
 exports.registerUniversity = (req, res, next) => {
     let fetchPost;
     const postQuery = University.find();
@@ -98,6 +126,7 @@ exports.addNewUniversity = (req, res, next) => {
 exports.viewAdminList = (req, res, next) => {
     University.findById(req.params.id).populate("users").exec(function(err, result) {
         if(err || !result) {
+            console.log('err', err)
             req.flash('error', 'Something went wrong, ' + err);
             res.render("sas/sasListAdmin", {
                 title: "SAS Register University | Student Application System",
@@ -106,6 +135,7 @@ exports.viewAdminList = (req, res, next) => {
                 univId: req.params.id
             }); 
         } else {
+            console.log('result', result)
             res.render("sas/sasListAdmin", {
                 title: "SAS Register University | Student Application System",
                 page: 'university',
@@ -145,9 +175,7 @@ exports.doEditQualification = (req, res, next) => {
         resultCalcDesc: req.body.resultCalcDesc,
         gradeList: req.body.gradeList
     });
-    console.log('qualification update', qualification, req.body)
     Qualification.updateOne({_id: req.params.id}, qualification).then(result => {
-        console.log('result', result);
         if(result.n > 0) {
             req.flash('success', 'Succesfully edit data');
             res.redirect('/sas/maintain');
@@ -194,15 +222,33 @@ exports.doAddUniversity = (req, res, next) => {
     })
 }
 
+exports.doEditUniversity = (req, res, next) => {
+    University.updateOne({_id: req.params.id}, {$set: {"universityName": req.body.univName}}).then(result => {
+        if(result.n > 0) {
+            req.flash('success', 'Succesfully edit data');
+            res.redirect('/sas/register');
+        } else {
+            req.flash('error', 'Something went wrong, ');
+            res.redirect('/sas/university/edit/' + req.params.id);
+        }
+    }).catch(err => {
+        req.flash('error', 'Something went wrong, ' + err);
+        res.redirect('/sas/university/edit/' + req.params.id);
+    });
+}
+
+
+
 exports.doAddAdminUniversity = (req, res, next) => {
     University.findById(req.params.id, function(err, university) {
         if(err) {
+            console.log('Error Tambah Admin',err)
             req.flash('error', 'Something went wrong, ' + err);
             res.redirect('/sas/new/' + req.params.id);
         } else {
             bcrypt.hash(req.body.password, 10)
                 .then(hash => {
-                    const user = new User({
+                    const userInput = new User({
                         username: req.body.username,
                         password: hash,
                         name: req.body.name,
@@ -210,20 +256,72 @@ exports.doAddAdminUniversity = (req, res, next) => {
                         level: 1
                     });
 
-                    User.create(user, function(err, user) {
-                        console.log('bikin admin', user)
+                    User.create(userInput, function(err, user) {
                         if(err) {
+                            console.log('Error Tambah Admin 1', err)
                             req.flash('error', 'Something went wrong, ' + err);
                             res.redirect('/sas/new/' + req.params.id);
                         } else {
-                            university.uniAdmin.push(user._id)
+                            console.log('University Sebelum', university)
+                            university.users.push(user._id)
                             university.save()
-                            console.log('tambah admin', university)
+                            console.log('University Sesudah', university)
                             req.flash('success', 'Succesfully add data');
                             res.redirect('/sas/university/admin/' + university._id);
                         }
                     });
                 });
+        }
+    });
+}
+
+exports.editAdminUniversity = (req, res, next) => {
+    User.findById(req.params.idAdmin).then(post => {
+        if(post) {
+            res.render("sas/sasEditAdminUniversity", {
+                title: "SAS Register University | Student Application System",
+                users: post,
+                page: 'university',
+                univId: req.params.idUniv
+            });
+        } else {
+            res.render("sas/sasEditAdminUniversity", {
+                title: "SAS Register University | Student Application System",
+                university: null,
+                page: 'university',
+                univId: req.params.idUniv
+            });
+        }
+    }).catch(err => {
+        res.render("sas/sasEditAdminUniversity", {
+            title: "SAS Register University | Student Application System",
+            university: null,
+            page: 'university',
+            univId: req.params.idUniv
+        });
+    })
+}
+
+
+
+exports.doDeleteAdminUniversity = (req, res, next) => {
+    University.findById(req.params.idUniv, function(err, university) {
+        if(err) {
+            req.flash('error', 'Something went wrong, ' + err);
+            res.redirect('/sas/university/admin/' + req.params.idUniv);
+        } else {
+            User.deleteOne({_id: req.params.idAdmin}, function(err, user) {
+                if(err) {
+                    req.flash('error', 'Something went wrong, ' + err);
+                    res.redirect('/sas/university/admin/' + req.params.idUniv);
+                } else {
+                    let userIndex = university.users.indexOf(req.params.idAdmin)
+                    university.users.splice(userIndex, 1)
+                    university.save()
+                    req.flash('success', 'Succesfully remove data');
+                    res.redirect('/sas/university/admin/' + req.params.idUniv);
+                }
+            });
         }
     });
 }
