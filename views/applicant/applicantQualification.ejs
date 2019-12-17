@@ -1,0 +1,26 @@
+<% include ../partials/headerNavApplicant %>
+
+    <a class="btn btn-outline-secondary" href="/applicant/new-qualification/<%= programId %>">Add Qualification</a>
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <% qualification.forEach(function(qualific) { %>
+                <div class="card mt-4 mx-2">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= qualific.qualificationName %>
+                        </h5>
+                        <p class="card-text">Subject Name:
+                            <%= qualific.subjectName %><br> Grade:
+                                <%= qualific.grade %><br> Score:
+                                    <%= qualific.score %>
+                        </p>
+                        <form action="/applicant/submit/<%= programId %>/<%= qualific._id %>" method="POST">
+                            <button type="submit" class="btn btn-primary">Use this Qualification</button>
+                        </form>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <% include ../partials/footer %>

@@ -39,7 +39,8 @@ exports.doLogin = (req, res, next) => {
                 "sEcreT_coDE",
                 { expiresIn: "1h" }
             );
-            const redirectTo = fetchUser.level === 0 ? '/applicant' : fetchUser.level === 1 ? '/university' : '/sas';
+            req.session.idUser = fetchUser._id
+            const redirectTo = fetchUser.level === 0 ? '/applicant' : fetchUser.level === 1 ? '/university/' + fetchUser._id : '/sas';
             return res.redirect(redirectTo);
         })
         .catch(err => {

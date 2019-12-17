@@ -10,4 +10,4 @@ var qualificationSchema = new mongoose.Schema({
 });
 
 // userSchema.plugin(passportLocalMongoose);
-module.exports = mongoose.model('qualification', qualificationSchema);
+module.exports = mongoose.model('Qualification', qualificationSchema);
