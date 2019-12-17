@@ -1,0 +1,19 @@
+<%- include ../partials/headerMainSAS %>
+<div class="maindiv">
+    <div>
+        <div class="window">
+            <h3>Edit University Admin</h3>
+            <form action="/sas/university/admin/edit/<%= users._id %>/<%= univId %>?_method=PUT" method="POST">
+                <h4>Username</h4>
+                <input value="<%= users.username %>" type="text" name="username" id="username" placeholder="Username" class="inputform">
+                <h4>Name</h4>
+                <input value="<%= users.name %>" type="text" name="name" id="name" placeholder="Name" class="inputform">
+                <h4>Email</h4>
+                <input value="<%= users.email %>" type="email" name="email" id="email" placeholder="Email" class="inputform">
+                <button type="submit" class="submitbutton">Submit</button>
+                <button class="submitbutton" ><a href="/sas/university/admin/<%= univId %>">Cancel</a></button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include ../partials/footerSAS %>

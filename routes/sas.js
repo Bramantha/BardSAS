@@ -1,5 +1,5 @@
 const express = require('express');
-const SasController = require('../controller/sas')
+const SasController = require('../controllers/sas')
 const router = express.Router();
 
 router.get('', SasController.viewHome);

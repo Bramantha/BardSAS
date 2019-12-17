@@ -1,47 +1,54 @@
-<% include ../partials/headerNavSAS %>
-
-    <a class="btn btn-outline-secondary" href="/sas/new/<%= univId %>">Add University Admin</a>
-    <a class="btn btn-outline-secondary" href="/sas/register">Back to University List</a>
-    <h4>Data University Admin -
-        <%= adminList.universityName %>
-    </h4>
-    <table class="table table-hover table-striped table-bordered">
-        <thead>
-            <tr class="table-dark">
-                <th scope="col">No.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% if(adminList.users.length > 0) { let i = 1; %>
-                <% adminList.users.forEach(function(admin) { %>
-                    <tr class="table-light">
-                        <th class="text-center" scope="row">
-                            <%= i %>
-                        </th>
-                        <td>
-                            <%= admin.name %>
-                        </td>
-                        <td>
-                            <%= admin.email %>
-                        </td>
-                        <td>
-                            <form class="form-inline" action="/sas/university/admin/<%= admin._id %>/<%= adminList._id %>?_method=DELETE" method="POST">
-                                <a href="/sas/university/admin/reset/<%= admin._id %>/<%= adminList._id %>" class="btn btn-warning mr-3" type="submit">Reset Password</a>
-                                <a href="/sas/university/admin/edit/<%= admin._id %>/<%= adminList._id %>" class="btn btn-warning mr-3" type="submit">Edit</a>
-                                <button class="btn btn-danger" type="submit">Delete</button>
-                            </form>
-                        </td>
+<%- include ../partials/headerMainSAS %>
+<div class="maindiv">
+    <nav>
+        <aside class="sideleft">
+            <div><a href='/sas/new/<%= univId %>'>+ Add Admin</a></div>
+        </aside>
+    </nav>
+    <nav>
+        <aside class="sideright"><h1>University Admin List</h1>
+            <!-- <div class="searchbar">
+                <input type="text" placeholder="Search" class="search" required>
+                <input type="button" value="Search" class="buttonsearch">
+            </div> -->
+            <table cellspacing='0'>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
                     </tr>
-                    <% i++; }) %>
-                        <% } else { %>
-                            <tr class="table-light">
-                                <td class="text-center" colspan="4">No Data Found</td>
+                </thead>
+                <tbody>
+                    <% if(adminList.users.length > 0) { let i=1; %>
+                        <% adminList.users.forEach(function(admin) { %>
+                            <tr>
+                                <th><%= i %></th>
+                                <td><%= admin.name %></td>
+                                <td><%= admin.email %></td>
+                                <td>
+                                    <!-- <form action="/sas/university/admin/<%= admin._id %>/<%= adminList._id %>?_method=DELETE" method="POST">
+                                        <a href="/sas/university/admin/edit/<%= admin._id %>/<%= adminList._id %>" class="buttonimg"><img src="../Logo/Edit.png" alt="Edit" class="tableimg"></a>
+                                        <button type="submit" class="buttonimg"><img src="../Logo/Delete.png" alt="Delete" class="tableimg"></button>
+                                    </form> -->
+                                    <button type="submit" class="buttonimg">
+                                        <a href="/sas/university/admin/edit/<%= admin._id %>/<%= adminList._id %>" type="submit" class="tableimg">Edit</a>
+                                    </button>
+                                    <form style="margin-top: 10px;" action="/sas/university/admin/<%= admin._id %>/<%= adminList._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="buttonimg"><a class="tableimg">Delete</a></button>
+                                    </form>
+                                </td>                                    
                             </tr>
-                            <% } %>
-        </tbody>
-    </table>
-
-    <% include ../partials/footer %>
+                        <% i++; }) %>
+                    <% } else { %>
+                        <tr >
+                            <td  colspan="5">No Data Found</td>
+                          </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </aside>
+    </nav>
+</div>
+<%- include ../partials/footerSAS %>

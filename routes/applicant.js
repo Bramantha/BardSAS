@@ -1,5 +1,5 @@
 const express = require('express');
-const ApplicantController = require('../controller/applicant')
+const ApplicantController = require('../controllers/applicant')
 const router = express.Router();
 
 router.get('', ApplicantController.viewHome);

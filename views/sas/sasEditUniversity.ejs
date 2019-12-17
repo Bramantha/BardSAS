@@ -1,19 +1,16 @@
-<% include ../partials/headerNavSAS %>
-
-    <a class="btn btn-outline-secondary" href="/sas/register">Back to Menu</a>
-    <h4>Update University Name</h4>
-    <form action="/sas/university/edit/<%= univId %>?_method=PUT" method=POST>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">University Name</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputEmail3" name="univName" value="<%= university.universityName %>">
-            </div>
+<%- include ../partials/headerMainSAS %>
+<div class="maindiv">
+    <div>
+        <div class="window">
+            <h3>Add University</h3>
+            <form action="/sas/university/edit/<%= univId %>?_method=PUT" method="POST">
+                <h4>University Name</h4>
+                <input value="<%= university.universityName %>" type="text" name="univName" id="univName" placeholder="University Name" class="inputform">
+                <input type="submit" value="Submit" class="submitbutton" href="#popup1">
+                <button type="submit" class="submitbutton" ><a href="/sas/register">Cancel</a></button>
+                <input type="hidden" name="id" value="<%= university._id %>">
+            </form>
         </div>
-        <div class="form-group row">
-            <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    </form>
-
-    <% include ../partials/footer %>
+    </div>
+</div>
+<%- include ../partials/footerSAS %>

@@ -8,7 +8,11 @@ var programmeSchema = new mongoose.Schema({
     universityID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "University"
-    }
+    },
+    applicationID: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Application"
+    }]
 });
 
 // userSchema.plugin(passportLocalMongoose);

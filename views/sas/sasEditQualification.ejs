@@ -1,44 +1,25 @@
-<% include ../partials/headerNavSAS %>
-
-<a class="btn btn-outline-secondary" href="/sas/maintain">Back to Menu</a>
-<h4>Input Qualification Data</h4>
-<form action="/sas/edit/<%= qualification._id %>?_method=PUT" method="POST">
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Qualification Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputEmail3" name="qualificationName" value="<%= qualification.qualificationName %>">
+<%- include ../partials/headerMainSAS %>
+<div class="maindiv">
+    <div>
+        <div class="window">
+            <!-- <a href="#" class="closebutton" title="Close">X</a> -->
+            <h3>Edit Qualification</h3>
+            <form action="/sas/edit/<%= qualification._id %>?_method=PUT" method="POST">
+                <h4>Qualification Name</h4>
+                <input value="<%= qualification.qualificationName %>" type="text" name="qualificationName" id="qualificationName" placeholder="Name" class="inputform">
+                <h4>Minimum score</h4>
+                <input value="<%= qualification.minimumScore %>" type="number" name="minimumScore" id="minimumScore" placeholder="Minimum score" class="inputform">
+                <h4>Maximum Score</h4>
+                <input value="<%= qualification.maximumScore %>" type="number" name="maximumScore" id="maximumScore" placeholder="Maximum score" class="inputform">
+                <h4>Grade List</h4>
+                <textarea name="gradeList" id="gradeList" placeholder="Grade List" class="inputform"><%= qualification.gradeList %></textarea>
+                <h4>Result Description</h4>
+                <textarea name="resultCalcDesc" id="exampleFormControlTextarea1" placeholder="Result Description" class="inputform"><%= qualification.resultCalcDesc %></textarea>
+                <button type="submit" class="submitbutton">Submit</button>
+                <button type="submit" class="submitbutton" ><a href="/sas/maintain">Cancel</a></button>
+                <input type="hidden" name="id" value="<%= qualification._id %>">
+            </form>
+        </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Minimum Score</label>
-    <div class="col-sm-10">
-      <input type="number" class="form-control" id="inputPassword3" name="minimumScore" value="<%= qualification.minimumScore %>">
-    </div>
-  </div>
-  <div class="form-group row">
-      <label for="inputPassword3" class="col-sm-2 col-form-label">Maximum Score</label>
-      <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPassword3" name="maximumScore" value="<%= qualification.maximumScore %>">
-      </div>
-    </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Grade List</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="gradeList"><%= qualification.gradeList %></textarea>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Result Calculation Description</label>
-    <div class="col-sm-10">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="resultCalcDesc"><%= qualification.resultCalcDesc %></textarea>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Submit Data</button>
-    </div>
-  </div>
-  <input type="hidden" name="id" value="<%= qualification._id %>">
-</form>
-
-<% include ../partials/footer %>
+</div>
+<%- include ../partials/footerSAS %>
