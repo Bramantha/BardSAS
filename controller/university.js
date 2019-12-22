@@ -17,7 +17,7 @@ exports.viewHome = (req, res, next) => {
         page: 'admin-home'
     });
 }
-// 
+
 exports.viewProgramme = (req, res, next) => {
     let idAdmin = req.params.idAdmin;
     University.find().then(docs => {
