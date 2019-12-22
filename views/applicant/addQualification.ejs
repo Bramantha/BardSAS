@@ -2,39 +2,39 @@
 
     <a class="btn btn-outline-secondary" href="/applicant/qualification/<%= programId %>">Back to Qaulification List</a>
     <h4>Input Qualification Data</h4>
-    <form action="/applicant/qualification/<%= programId %>" method="POST">
+    <form id="formAddQualification" action="/applicant/qualification/<%= programId %>" method="POST">
         <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Qualification Name</label>
+            <label for="qualificationName" class="col-sm-2 col-form-label">Qualification Name</label>
             <div class="col-sm-10">
                 <select class="custom-select" name="qualificationName" id="qualificationName" required>
-               <option value="" selected hidden>Select Qualification Name</option>
-               <% qualification.forEach(function(qualic) { %>
-                    <option value="<%= qualic.qualificationName %>"><%= qualic.qualificationName %></option>
-               <% }) %>
-           </select>
+                    <option value="" selected hidden>Select Qualification Name</option>
+                    <% qualification.forEach(function(qualic) { %>
+                            <option value="<%= qualic.qualificationName %>"><%= qualic.qualificationName %></option>
+                    <% }) %>
+                </select>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Subject Name</label>
+            <label for="subjectName" class="col-sm-2 col-form-label">Subject Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPassword3" name="subjectName">
+                <input type="text" class="form-control" id="subjectName" name="subjectName" required>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Grade</label>
+            <label for="grade" class="col-sm-2 col-form-label">Grade</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputPassword3" name="grade">
+                <input type="text" class="form-control" id="grade" name="grade" required>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Score</label>
+            <label for="score" class="col-sm-2 col-form-label">Score</label>
             <div class="col-sm-10">
-                <input type="number" class="form-control" id="inputPassword3" name="score" onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46'>
+                <input type="number" class="form-control" id="score" name="score" required onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46'>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Submit Data</button>
+                <button type="button" class="btn btn-primary" onclick="validateAddQualification()">Submit Data</button>
             </div>
         </div>
     </form>

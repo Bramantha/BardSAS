@@ -8,7 +8,8 @@
                 <th scope="col">Programme Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Closing Date</th>
-                <th scope="col">Status</th>
+                <th scope="col">Applicants</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,11 +28,14 @@
                         <td>
                             <%= moment(programme.closingDate).format("D MMMM YYYY")  %>
                         </td>
+                        <td>
+                            <%= programme.countApplicant  %>
+                        </td>
                         <td class="text-center">
-                            <form class="form-inline" action="/university/<%= idAdmin %>/<%= programme._id %>?_method=DELETE" method="POST">
-                                <a href="/university/<%= idAdmin %>/review/<%= programme._id %>" class="btn btn-warning mr-3" type="submit">Applicant</a>
+                            <form id="formDeleteProgram<%= i %>" class="form-inline" action="/university/<%= idAdmin %>/<%= programme._id %>?_method=DELETE" method="POST">
+                                <a href="/university/<%= idAdmin %>/review/<%= programme._id %>" class="btn btn-info mr-3" type="submit">Applicant</a>
                                 <a href="/university/<%= idAdmin %>/edit/<%= programme._id %>" class="btn btn-warning mr-3" type="submit">Edit</a>
-                                <button class="btn btn-danger" type="submit">Delete</button>
+                                <button class="btn btn-danger" type="button" onclick="validateDeleteProgram(<%= i %>)">Delete</button>
                             </form>
                         </td>
                     </tr>

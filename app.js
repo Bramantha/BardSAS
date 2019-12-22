@@ -29,20 +29,13 @@ app.use(methodOverride('_method')); // Overide form method attribute fo use meth
 app.use(flash()); // Use to show message
 app.locals.moment = require('moment');
 
-// passport configuration
 app.use(require('express-session')({
     secret: 'Secret Code',
     resave: false,
     saveUninitialized: false
 }));
-// app.use(passport.initialize());
-// app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next) {
-    // res.locals.currentUser = req.user;
     res.locals.error = req.flash('error');
     res.locals.success = req.flash('success');
     next()
@@ -53,5 +46,9 @@ app.use('/student/', studentRoutes);
 app.use('/sas/', sasRoutes);
 app.use('/university/', universityRoutes);
 app.use('/applicant/', applicantRoutes);
+
+app.get('*', function(req, res){
+    res.send("404 Page Not Found!")
+})
 
 module.exports = app;

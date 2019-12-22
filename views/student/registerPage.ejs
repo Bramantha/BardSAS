@@ -7,20 +7,21 @@
                     <h1 class="h3 mb-3 font-weight-normal">Sign Up</h1>
                 </div>
                 <div class="card-body">
-                    <form class="form-signin" action="/student/signup" method="POST">
-                        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
-                        <select style="margin-bottom: 30px; border-radius: 50px 50px;" class="custom-select" name="idType" id="idType" required>
+                    <form id="formRegister" class="form-signin" action="/student/signup" method="POST">
+                        <input id="name" type="text" name="name" class="form-control" placeholder="Full Name" required>
+                        <select id="idType" class="custom-select" name="idType" required>
                             <option value="" selected hidden>Select ID Type</option>
                             <option value="1">MyKad</option>
                             <option value="2">Passport</option>
                         </select>
-                        <input type="text" name="idNumber" class="form-control" placeholder="ID Number" required onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46'>
-                        <input type="text" name="birthdate" id="birthdate" class="form-control" placeholder="Date of Birth" onkeydown="event.preventDefault()" required>
-                        <input type="text" name="mobileNo" class="form-control" placeholder="Mobile Number" onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46' required>
-                        <input type="text" name="username" class="form-control" placeholder="Username" required>
-                        <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
-                        <button class="btn btn-lg btn-primary btn-block btn-radius" type="submit">Sign up</button>
+                        <input type="text" id="idNumber" name="idNumber" class="form-control" placeholder="ID Number" required onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46'>
+                        <input type="text" id="birthdate" name="birthdate" class="form-control" placeholder="Date of Birth" onkeydown="event.preventDefault()" required>
+                        <input type="text" id="mobileNo" name="mobileNo" class="form-control" placeholder="Mobile Number" onkeydown='return (event.which >= 48 && event.which <= 57) || event.which == 8 || event.which == 46' required>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                        <input type="password" id="rePassword" name="rePassword" class="form-control" placeholder="Re-Type Password" required>
+                        <button class="btn btn-lg btn-primary btn-block btn-radius" type="button" onclick="validateRegister()">Sign up</button>
                     </form>
                     <p class="h5">Have an account?</p>
                     <a href="/signin">Sign In Now</a>
