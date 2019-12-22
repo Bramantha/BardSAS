@@ -1,3 +1,4 @@
+
 <% include ../partials/headerNavApplicant %>
 
     <a class="btn btn-outline-secondary" href="/applicant/new-qualification/<%= programId %>">Add Qualification</a>
@@ -14,8 +15,8 @@
                                 <%= qualific.grade %><br> Score:
                                     <%= qualific.score %>
                         </p>
-                        <form action="/applicant/submit/<%= programId %>/<%= qualific._id %>" method="POST">
-                            <button type="submit" class="btn btn-primary">Use this Qualification</button>
+                        <form id="formUseQualification" action="/applicant/submit/<%= programId %>/<%= qualific._id %>" method="POST">
+                            <button type="button" class="btn btn-primary" onclick="useQualification()">Use this Qualification</button>
                         </form>
                     </div>
                 </div>
@@ -24,3 +25,4 @@
     </div>
 
     <% include ../partials/footer %>
+

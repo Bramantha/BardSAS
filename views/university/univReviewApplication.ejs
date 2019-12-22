@@ -1,3 +1,4 @@
+
 <% include ../partials/headerNavUniv %>
 
     <h4>List Of Programme</h4>
@@ -6,20 +7,45 @@
             <tr class="table-dark">
                 <th scope="col">No</th>
                 <th scope="col">Applicant Name</th>
-                <th scope="col">Description</th>
+                <th scope="col">Qualification Name</th>
                 <th scope="col">Date Apply</th>
                 <th scope="col">Status</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="table-light">
-                <th scope="row">1</th>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <% if(applications.length > 0) { let i=1; %>
+                <% applications.forEach(function(application) { %>
+                    <tr class="table-light">
+                        <th scope="row">
+                            <%= i %>
+                        </th>
+                        <td>
+                            <%= application.userName %>
+                        </td>
+                        <td>
+                            <%= application.qualificationName %>
+                        </td>
+                        <td>
+                            <%= moment(application.applicationDate).format("D MMMM YYYY")  %>
+                        </td>
+                        <td>
+                            <span class="badge badge-pill badge-<%= application.status === 'NEW' ? 'info' : application.status === 'SUCCESSFUL' ? 'success' : 'danger' %>">
+                                <%= application.status %>
+                            </span>
+                        </td>
+                        <td class="text-center">
+                            <a href="/university/<%= idAdmin %>/<%= idProgram %>/detail/<%= application._id %>" class="btn btn-info">Detail Applicant</a>
+                        </td>
+                    </tr>
+                    <% i++; }) %>
+                        <% } else { %>
+                            <tr class="table-light">
+                                <td class="text-center" colspan="6">No Data Found</td>
+                            </tr>
+                            <% } %>
         </tbody>
     </table>
 
     <% include ../partials/footer %>
+
